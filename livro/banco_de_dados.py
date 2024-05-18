@@ -37,4 +37,6 @@ cursor.execute('CREATE  TABLE emprestimos(\
 
 
 
+
+
 cursor.close

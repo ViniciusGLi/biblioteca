@@ -37,7 +37,7 @@ co11 = "#f2f4f2"
 
 janela = Tk()
 janela.title ("")
-janela.geometry('770x330')
+janela.geometry('900x400')
 janela.configure(background=co1)
 janela.resizable(width=FALSE, height=FALSE)
 
@@ -229,7 +229,7 @@ def ver_usuarios():
     l_linha = Label(frameDireita, width=400, height=1,anchor=NW, font=('Verdana 1 '), bg=co3, fg=co1)
     l_linha.grid(row=1, column=0, columnspan=3, sticky=NSEW)
 
-    dados = get_users()
+    dados = get_user 
 
     # creating a treeview with dual scrollbars
     list_header = ['ID','Nome','Sobrenome','Endereço','Email','Telefone']
@@ -261,8 +261,9 @@ def ver_usuarios():
         tree.column(col, width=h[n],anchor=hd[n])
         
         n+=1
+    dados_result = dados()
 
-    for item in dados:
+    for item in dados_result:
         tree.insert('', 'end', values=item)
 
 
@@ -274,8 +275,7 @@ def ver_livros():
     l_linha = Label(frameDireita, width=400, height=1,anchor=NW, font=('Verdana 1 '), bg=co3, fg=co1)
     l_linha.grid(row=1, column=0, columnspan=3, sticky=NSEW)
 
-    dados = get_books()
-
+    dados = exibir_livros
     # creating a treeview with dual scrollbars
     list_header = ['ID','Título','Autor','Editora','Ano','ISBN']
     
@@ -306,8 +306,9 @@ def ver_livros():
         tree.column(col, width=h[n],anchor=hd[n])
         
         n+=1
+    dados_result = dados()
 
-    for item in dados:
+    for item in dados_result:
         tree.insert('', 'end', values=item)
 
 
@@ -409,7 +410,7 @@ def ver_livros_emprestados():
         
         n+=1
 
-    for item in dados:
+    for item in books_on_loan:
         tree.insert('', 'end', values=item)
 
 # Devolução de um empréstimo

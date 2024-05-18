@@ -47,6 +47,7 @@ while True:
             print(f"ID: {user[0]}\nNome: {user[1]}\nTelefone: {user[5]}\nEmail: {user[4]}\n")
 
 
+#pode detonar
     elif choice == "4":
         user_id = input("Digite o ID do usuário: ")
         book_id = input("Digite o ID do livro: ")

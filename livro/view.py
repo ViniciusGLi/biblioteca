@@ -25,26 +25,23 @@ def insert_user(nome,sobrenome, endereco, email, telefone):
     conn.commit()  # Não se esqueça de fazer commit das alterações
     conn.close()
     
+def get_user():
+    conn = connect()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM usuarios")
+    users = cursor.fetchall()
+    conn.close()
+    return users
+
+    return livros
 
 def exibir_livros():
     conn = connect()
     cursor = conn.cursor()
     livros = cursor.execute("SELECT *  FROM livros")
     rows = cursor.fetchall()
-    
-    if not rows:
-        print("Nenhum livro encontrado na biblitoeca")
-        return
-    
-    print("Livros na bblioteca: ")
-    for livros in rows:
-        print(f"ID: {livros[0]}")
-        print(f"Titulo: {livros[1]}")
-        print(f"Autor: {livros[2]}")
-        print(f"Editora: {livros[3]}")
-        print(f"Ano de Publicacao: {livros[4]}")
-        print(f"Isbn: {livros[5]}")
-        print("\n")
+    return rows
+  
 
 def insert_loan(id_livro, id_usuario, data_emprestimo, data_devolucao):
     conn = connect()
@@ -56,13 +53,12 @@ def insert_loan(id_livro, id_usuario, data_emprestimo, data_devolucao):
 def get_books_on_loan():
     conn = connect()
     cursor = conn.cursor()  # Cria um objeto cursor
-    cursor.execute("SELECT livros.titulo, usuarios.nome, usuarios.sobrenome, emprestimos.data_emprestimo, emprestimos.data_devolucao \
-                    FROM livros \
-                    INNER JOIN emprestimos ON livros.id = emprestimos.id_livro \
-                    INNER JOIN usuarios ON usuarios.id = emprestimos.id_usuario \
-                    WHERE emprestimos.data_devolucao IS NULL")
+    cursor.execute("SELECT emprestimos.id, livros.titulo, usuarios.nome, usuarios.sobrenome, emprestimos.data_emprestimo, emprestimos.data_devolucao \
+                           FROM livros \
+                           INNER JOIN emprestimos ON livros.id = emprestimos.id_livro \
+                           INNER JOIN usuarios ON usuarios.id = emprestimos.id_usuario \
+                           WHERE emprestimos.data_devolucao IS NULL")
     result = cursor.fetchall()  # Busca todas as linhas
-    conn.commit()
     cursor.close()
     conn.close()
     return result
@@ -77,10 +73,9 @@ def update_loan_return_date(id_emprestimo, data_devolucao):
 
 # insert_book("One Piece", "Oda", "Nao sei", 5662, "5788598270692")
 
-'''# Exemplo de uso das funções
-insert_book("One Piece", "Oda", "Nao sei", 5662, "5788598270692")
-insert_user("João", "Silva", "Rua A, 123", "joao.silva@email.com", "(11) 1234-5678")
+#insert_book("One Piece", "Oda", "Nao sei", 5662, "5788598270692")
+#insert_user("João", "Silva", "Rua A, 123", "joao.silva@email.com", "(11) 1234-5678")
 insert_loan(1, 1, "2022-03-25", None)
-books_on_loan = get_books_on_loan()
-print(books_on_loan)
-update_loan_return_date(1, "2022-03-28")'''
+#books_on_loan = get_books_on_loan()
+#print(books_on_loan)
+#update_loan_return_date(1, "2022-03-28")'''
